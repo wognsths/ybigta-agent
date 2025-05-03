@@ -1,22 +1,26 @@
-import os
+# config.py
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class DBSettings(BaseSettings):
-    POSTGRES_USER: str = os.getenv("DB_USER", "postgres")
-    POSTGRES_PASSWORD: str = os.getenv("DB_PASSWORD", "")
-    POSTGRES_HOST: str = os.getenv("DB_HOST", "localhost")
-    POSTGRES_PORT: str = os.getenv("DB_PORT", "5432")
-    POSTGRES_DB: str = os.getenv("DB_NAME", "postgres")
+    POSTGRES_USER: str
+    POSTGRES_PASSWORD: str
+    POSTGRES_HOST: str
+    POSTGRES_PORT: int
+    POSTGRES_DB: str
 
-    BASE_URL: str = os.getenv("BASE_URL", "http://localhost:8000")
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        case_sensitive=True
+    )
 
     @property
-    def DATABASE_URL(self) -> str:  # noqa: N802
+    def DATABASE_URL(self) -> str:
         return (
-            f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}"
-            f"@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
+            f"postgresql+psycopg2://"
+            f"{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@"
+            f"{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/"
+            f"{self.POSTGRES_DB}"
         )
-
-    model_config = SettingsConfigDict(env_file=".env", case_sensitive=True)
 
 settings = DBSettings()

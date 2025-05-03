@@ -32,7 +32,7 @@ class Database:
         """Establish database connection and session factory."""
         try:
             # Create SQLAlchemy engine
-            self.engine = create_engine(self.db_url)
+            self.engine = create_engine(self.db_url + "?client_encoding=utf8")
             # Configure session factory
             self.SessionLocal = sessionmaker(
                 autocommit=False,

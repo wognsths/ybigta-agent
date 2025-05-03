@@ -24,7 +24,7 @@ from app.common.types import (
     InvalidParamsError,
 )
 from app.common.server.task_manager import InMemoryTaskManager
-from app.agents.database_agent.agent import DBAgent
+from app.agents.database_agent.agent.agent import DBAgent
 from app.common.utils.push_notification_auth import PushNotificationSenderAuth
 import app.common.server.utils as utils
 from typing import Union
