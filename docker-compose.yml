@@ -1,0 +1,48 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: ybigta-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER:     ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB:       ${POSTGRES_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - ybigta-net
+
+  db-api:
+    build:
+      context: . 
+      dockerfile: docker/database.Dockerfile
+    container_name: ybigta-db-api
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    networks:
+      - ybigta-net
+
+  db-agent:
+    build:
+      context: .
+      dockerfile: docker/db_agent.Dockerfile
+    container_name: ybigta-db-agent
+    depends_on:
+      - db-api
+    ports:
+      - "10001:10001"
+    env_file:
+      - .env
+    networks:
+      - ybigta-net
+
+networks:
+  ybigta-net:
+    driver: bridge
+
+volumes:
+  pgdata:
