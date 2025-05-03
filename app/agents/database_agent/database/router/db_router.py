@@ -33,18 +33,10 @@ def get_table_list():
     tables = schema_manager.get_tables()
     return {"tables": tables}
 
-@router.get("/{table_name}/uniques", summary="Get unique values of a table")
-def get_table_unique(table_name: str, limit: int = 10):
-    try:
-        uniques = schema_manager.get_column_uniques(table_name, limit)
-        return {f"unique values of each columns in table: {table_name}": uniques}
-    except Exception as e:
-        return {"error": str(e)}
-
 @router.get("/{table_name}/summary", summary="Get summaries of a table")
 def get_table_summary(table_name: str):
     try:
         summaries = schema_manager.get_table_summary(table_name)
-        return {f"Summary of table: {table_name}": table_name}
+        return {f"Summary of table: {table_name}": summaries}
     except Exception as e:
         return {"error": str(e)}

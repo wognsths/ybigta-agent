@@ -5,7 +5,7 @@ import os
 from ..database.config import settings
 
 # Get database URL from environment variable or default to service name in Docker
-BASE_URL = os.getenv('DATABASE_AGENT_URL', 'http://database_agent:8080')
+BASE_URL = os.getenv('DATABASE_AGENT_URL', 'http://db-api:8080')
 
 def request_helper(method: str, endpoint: str, **kwargs) -> Any:
     url = f"{BASE_URL}{endpoint}"
@@ -37,20 +37,12 @@ def get_table_sample(table_name: str, limit: int = 5) -> Any:
     """Get a sample of rows from a specific table."""
     return request_helper(
         "get",
-        f"/db/{table_name}/sample?limit={limit}")
+        f"/db/{table_name}/samples?limit={limit}")
 
 @tool
 def run_custom_query(sql_query: str) -> Any:
     """Run a custom SQL query against the database."""
     return request_helper("post", "/db/query", json={"query": sql_query})
-
-@tool
-def get_table_uniques(table_name: str, limit: int = 10) -> Any:
-    """Get a unique values from a specific table's columns"""
-    return request_helper(
-        "get",
-        f"/db/{table_name}/uniques?limit={limit}"
-    )
 
 @tool
 def get_table_summary(table_name: str) -> Any:

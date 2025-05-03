@@ -12,7 +12,7 @@ from langgraph.prebuilt import create_react_agent
 from langgraph.checkpoint.memory import MemorySaver
 from langchain_core.messages import AIMessage, ToolMessage
 
-from .tools import get_database_schema, get_table_list, get_table_sample, get_table_summary, get_table_uniques, run_custom_query
+from .tools import get_database_schema, get_table_list, get_table_sample, get_table_summary, run_custom_query
 from .prompts import SYSTEM_INSTRUCTION
 
 class DBAgentResponse(BaseModel):
@@ -33,7 +33,6 @@ class DBAgent:
             get_table_list,
             get_table_sample,
             get_table_summary,
-            get_table_uniques,
             run_custom_query
         ]
         self.graph = create_react_agent(
