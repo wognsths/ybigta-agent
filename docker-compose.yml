@@ -37,6 +37,8 @@ services:
       - "10001:10001"
     env_file:
       - .env
+    environment:
+      DATABASE_AGENT_URL: http://db-api:8080
     networks:
       - ybigta-net
 
