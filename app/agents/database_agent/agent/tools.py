@@ -1,8 +1,11 @@
 from typing import Any
 from langchain_core.tools import tool
 import httpx
-from ..core.config import settings
-BASE_URL = settings.DATABASE_URL
+import os
+from ..database.config import settings
+
+# Get database URL from environment variable or default to service name in Docker
+BASE_URL = os.getenv('DATABASE_AGENT_URL', 'http://database_agent:8080')
 
 def request_helper(method: str, endpoint: str, **kwargs) -> Any:
     url = f"{BASE_URL}{endpoint}"

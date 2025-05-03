@@ -12,9 +12,13 @@ from langgraph.prebuilt import create_react_agent
 from langgraph.checkpoint.memory import MemorySaver
 from langchain_core.messages import AIMessage, ToolMessage
 
-from ..core.models import DBAgentResponse
 from .tools import get_database_schema, get_table_list, get_table_sample, get_table_summary, get_table_uniques, run_custom_query
 from .prompts import SYSTEM_INSTRUCTION
+
+class DBAgentResponse(BaseModel):
+    """Respond to the user in this format."""
+    status: Literal["input_required", "completed", "error"] = "input_required"
+    message: str
 
 memory = MemorySaver()
 
@@ -42,7 +46,14 @@ class DBAgent:
     def invoke(self, query, sessionId) -> DBAgentResponse:
         config = {"configurable": {"thread_id": sessionId}}
         self.graph.invoke({"messages": [("user", query)]}, config)
-        return self.get_agent_response(config)
+        sr = self.graph.get_state(config).values.get("structured_response")
+        if isinstance(sr, DBAgentResponse):
+            return sr
+
+        return DBAgentResponse(
+            status="error",
+            message="Unexpected error: unable to retrieve agent response."
+        )
     
     async def stream(self, query, sessionId) -> AsyncIterable[Dict[str, Any]]:
         inputs = {"messages": [("user", query)]}

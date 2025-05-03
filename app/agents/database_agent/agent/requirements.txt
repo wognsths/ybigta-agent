@@ -1,0 +1,27 @@
+# Web framework
+fastapi>=0.100.0
+uvicorn[standard]>=0.23.0
+starlette>=0.27.0
+sse-starlette>=0.7.2
+
+# HTTP Client & SSE
+httpx>=0.23.0
+httpx-sse>=0.2.0
+
+# DB
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.6
+
+# Settings
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+python-dotenv>=1.0.0
+
+# JWT / JWK
+PyJWT>=2.7.0
+jwcrypto>=1.1.0
+
+# LangChain / LangGraph
+langchain-google-genai>=0.0.1
+langchain-core>=0.0.1
+langgraph>=0.1.0
