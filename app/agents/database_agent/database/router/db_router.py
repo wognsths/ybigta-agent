@@ -1,7 +1,9 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
-from app.agents.database_agent.core.database import db, schema_manager
-from app.agents.database_agent.core.models import QueryRequest
+from app.agents.database_agent.database.database import db, schema_manager
+
+class QueryRequest(BaseModel):
+    query: str
 
 router = APIRouter()
 

@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.agents.database_agent.routes.db_router import router
+from app.agents.database_agent.database.router.db_router import router
 
 app = FastAPI(
     title="Database API",
@@ -7,7 +7,7 @@ app = FastAPI(
     version="1.0.0"
 )
 
-app.include_router(router, prefix="/db", tags="database")
+app.include_router(router, prefix="/db", tags=["database"])
 
 @app.get("/")
 def read_root():

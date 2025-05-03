@@ -8,7 +8,12 @@ from sqlalchemy import (
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from .config import settings
-from .models import NoAuthorizationError
+
+class NoAuthorizationError(Exception):
+    def __init__(self, query: str, message: str = "Forbidden SQL operation attempted."):
+        self.query = query
+        self.message = message
+        super().__init__(f"{message}\nThis query is blocked. Use this query with directly accessing to database: {query}")
 
 # Configure module-level logger
 logger = logging.getLogger(__name__)
