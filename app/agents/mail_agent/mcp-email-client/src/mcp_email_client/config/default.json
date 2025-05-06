@@ -1,0 +1,14 @@
+{
+    "servers": {
+        "any-name": {
+            "type": "stdio",
+            "command": "/path/to/uv",
+            "args": [
+                "run",
+                "--directory",
+                "/path/to/repo",
+                "run_mcp_server.py",
+            ]
+        }
+    }
+}
