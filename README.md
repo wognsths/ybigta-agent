@@ -45,6 +45,7 @@ Each agent lives in its own folder:
 
 * [https://github.com/parthshr370/Email-AI-Agent](https://github.com/parthshr370/Email-AI-Agent)
 * [https://github.com/Tonyloyt/Email-Automation-with-python](https://github.com/Tonyloyt/Email-Automation-with-python)
+* https://github.com/Shy2593666979/mcp-server-email
 
 ### Database Agents
 
