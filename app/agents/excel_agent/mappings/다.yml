@@ -1,0 +1,58 @@
+# Mapping file for template "다"
+# Filtered report for specific product/category
+
+# Title cell references
+title:
+  "FilteredData": "A1"
+  "Metrics": "A1"
+
+# Static cells
+static:
+  "FilteredData":
+    "A2": "Filtered data view"
+    "A3": "Filter criteria:"
+  "Metrics":
+    "A2": "Key performance indicators"
+    "A3": "Based on filtered dataset"
+
+# Data mappings
+data_mappings:
+  # Filter information
+  - sheet: "FilteredData"
+    type: "direct"
+    cells:
+      "B3": "filter_value"
+  
+  # Table headers
+  - sheet: "FilteredData"
+    type: "direct"
+    cells:
+      "A5": "ID"
+      "B5": "Date"
+      "C5": "Value"
+      "D5": "Status"
+  
+  # Filtered data rows
+  - sheet: "FilteredData"
+    type: "row_iteration"
+    start_row: 6
+    columns:
+      "id": "A"
+      "date": "B"
+      "value": "C"
+      "status": "D"
+  
+  # Metrics calculations
+  - sheet: "Metrics"
+    type: "direct"
+    cells:
+      "A5": "Total Count"
+      "B5": "count(id)"
+      "A6": "Total Value"
+      "B6": "sum(value)"
+      "A7": "Average Value"
+      "B7": "mean(value)"
+      "A8": "Maximum Value"
+      "B8": "max(value)"
+      "A9": "Minimum Value"
+      "B9": "min(value)" 

@@ -1,0 +1,18 @@
+
+title:
+  "Sheet1": "A1"
+  "Summary": "A1"
+static:
+  "Sheet1":
+    "A2": "Test data"
+data_mappings:
+  - sheet: "Sheet1"
+    type: "direct"
+    cells:
+      "C5": "100"  # Static value for testing
+  - sheet: "Summary"
+    type: "row_iteration"
+    start_row: 5
+    columns:
+      "date": "A"
+      "value": "B"

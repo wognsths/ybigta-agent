@@ -1,0 +1,60 @@
+# Mapping file for template "마"
+# Percentage calculations and breakdown analysis
+
+# Title cell references
+title:
+  "Breakdown": "A1"
+  "Percentages": "A1"
+
+# Static cells
+static:
+  "Breakdown":
+    "A2": "Breakdown analysis"
+    "A3": "Part to whole relationship"
+  "Percentages":
+    "A2": "Percentage calculations"
+    "A3": "Values expressed as % of total"
+
+# Data mappings
+data_mappings:
+  # Table headers for breakdown
+  - sheet: "Breakdown"
+    type: "direct"
+    cells:
+      "A5": "Category"
+      "B5": "Total"
+      "C5": "Part A"
+      "D5": "Part B"
+      "E5": "Part C"
+  
+  # Row data with parts
+  - sheet: "Breakdown"
+    type: "row_iteration"
+    start_row: 6
+    columns:
+      "category": "A"
+      "total": "B"
+      "part_a": "C"
+      "part_b": "D"
+      "part_c": "E"
+  
+  # Percentage table headers
+  - sheet: "Percentages"
+    type: "direct"
+    cells:
+      "A5": "Category"
+      "B5": "Total %"
+      "C5": "Part A %"
+      "D5": "Part B %"
+      "E5": "Part C %"
+  
+  # Percentage calculations
+  - sheet: "Percentages"
+    type: "row_iteration"
+    start_row: 6
+    columns:
+      "category": "A"
+      "total": "B"
+      "part_a_pct": "C"
+      "part_b_pct": "D"
+      "part_c_pct": "E" 

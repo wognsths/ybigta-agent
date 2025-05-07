@@ -1,0 +1,56 @@
+# Mapping file for template "라"
+# Time series report with resampling
+
+# Title cell references
+title:
+  "TimeSeries": "A1"
+  "Analysis": "A1"
+
+# Static cells
+static:
+  "TimeSeries":
+    "A2": "Time series data analysis"
+    "A3": "Resampling frequency: Daily"
+    "A4": "Data points:"
+  "Analysis":
+    "A2": "Statistical analysis"
+    "A3": "Moving averages and trends"
+
+# Data mappings
+data_mappings:
+  # Data point count
+  - sheet: "TimeSeries"
+    type: "direct"
+    cells:
+      "B4": "count(date)"
+  
+  # Table headers
+  - sheet: "TimeSeries"
+    type: "direct"
+    cells:
+      "A6": "Date"
+      "B6": "Value"
+      "C6": "Change"
+  
+  # Time series data
+  - sheet: "TimeSeries"
+    type: "row_iteration"
+    start_row: 7
+    columns:
+      "date": "A"
+      "value": "B"
+  
+  # Period statistics
+  - sheet: "Analysis"
+    type: "direct"
+    cells:
+      "A5": "Start Date"
+      "B5": "min(date)"
+      "A6": "End Date"
+      "B6": "max(date)"
+      "A7": "Period Average"
+      "B7": "mean(value)"
+      "A8": "Period Total"
+      "B8": "sum(value)"
+      "A9": "Count"
+      "B9": "count(date)" 
